@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RM Match Centre</string>
+    <string name="action_settings">Settings</string>
+    <string name="image_home">Image Home</string>
+    <string name="image_away">Image Away</string>
+    <string name="realURL">http://football.sport-express.ru/command/68/</string>
+    <string name="status_home">http://ss.sport-express.ru/img/design/football/home.png</string>
+    <string name="nameRealMadrid">Реал Мадрид</string>
+    <string name="urlAdress">http://ss.sport-express.ru/img/football/commands/</string>
+    <string name="extensionPng">.png</string>
+    <string name="IOErrorText">Не удалось загрузить данные</string>
+    <string name="TryAgain">Повторите попытку</string>
+    <string name="RefreshText">"Обновлено: "</string>
+</resources>
