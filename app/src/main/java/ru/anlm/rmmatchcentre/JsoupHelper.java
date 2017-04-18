@@ -58,16 +58,25 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             Elements elementsLastMatch = document.select("#match_box_1 img");
             String nameHomeLast = elementsLastMatch.get(1).attr("alt");
             String nameGuestLast = elementsLastMatch.get(2).attr("alt");
+            String hrefGuestImageLM = elementsLastMatch.get(2).attr("src");
+
+            //Получаем дату и название лиги для будущего матча
+            Elements elementsDataLastMatch = document.select("#match_box_1 div");
+            String dayMatchLast = elementsDataLastMatch.get(0).text();
+            String tournirResLast = elementsDataLastMatch.get(1).text();
+
+            if(nameGuestLast.equals("ДВ")){
+                nameGuestLast = elementsLastMatch.get(3).attr("alt");
+                hrefGuestImageLM = elementsLastMatch.get(3).attr("src");
+                tournirResLast = elementsDataLastMatch.get(2).text();
+            }
 
             if(nameHomeLast.equals("Реал")) {
                 nameHomeLast = "Реал Мадрид";
             }else if (nameGuestLast.equals("Реал")){
                 nameGuestLast = "Реал Мадрид";}
 
-            //Получаем дату и название лиги для будущего матча
-            Elements elementsDataLastMatch = document.select("#match_box_1 div");
-            String dayMatchLast = elementsDataLastMatch.get(0).text();
-            String tournirResLast = elementsDataLastMatch.get(1).text();
+
 
             //Получаем результат прошлого матча
             Elements elementsResultLastMatch = document.select("#match_box_1 span");
@@ -125,7 +134,7 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
 
 
             /////4-ая картинка
-            String hrefGuestImageLM = elementsLastMatch.get(2).attr("src");
+
             String nameImageGuestLM = hrefGuestImageLM.replaceAll("[^0-9]", "") + ".png";
             hrefGuestImageLM = "http://ss.sport-express.ru/img/football/commands/"+ nameImageGuestLM;
 
