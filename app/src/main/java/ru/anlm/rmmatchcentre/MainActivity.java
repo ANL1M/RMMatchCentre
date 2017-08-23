@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
         switch (position) {
             case 0:
-                return "Last match";
+                return getString(R.string.TabLastMatch);
             case 1:
-                return "Future match";
+                return getString(R.string.TabFutureMatch);
             case 2:
-                return "Table result";
+                return getString(R.string.TabResult);
         }
         return null;
     }

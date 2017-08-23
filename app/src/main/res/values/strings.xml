@@ -11,4 +11,7 @@
     <string name="IOErrorText">Не удалось загрузить данные</string>
     <string name="TryAgain">Повторите попытку</string>
     <string name="RefreshText">"Обновлено: "</string>
+    <string name="TabLastMatch">Прошлый матч</string>
+    <string name="TabFutureMatch">Ближайший матч</string>
+    <string name="TabResult">Чемпионат</string>
 </resources>
