@@ -146,85 +146,6 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             String dirBitmapGuestLM = directory.getAbsolutePath() + "/" + nameImageGuestLM;
 
             Elements elementsTableImages = document.select(".teamlogo img");
-            ///////5-ая картинка
-            String hrefTableOne = elementsTableImages.get(0).attr("src");
-            String nameImageTableOne = hrefTableOne.replaceAll("[^0-9]", "") + ".png";
-            hrefTableOne = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTableOne;
-
-            in = new URL(hrefTableOne).openStream();
-            Bitmap bitmapTableOne = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageTableOne);
-            fos = new FileOutputStream(mypath);
-            bitmapTableOne.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapTableOne = directory.getAbsolutePath() + "/" + nameImageTableOne;
-
-            ///////6-ая картинка
-            String hrefTableTwo = elementsTableImages.get(1).attr("src");
-            String nameImageTableTwo = hrefTableTwo.replaceAll("[^0-9]", "") + ".png";
-            hrefTableTwo = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTableTwo;
-
-            in = new URL(hrefTableTwo).openStream();
-            Bitmap bitmapTableTwo = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageTableTwo);
-            fos = new FileOutputStream(mypath);
-            bitmapTableTwo.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapTableTwo = directory.getAbsolutePath() + "/" + nameImageTableTwo;
-
-            ///////7-ая картинка
-            String hrefTableThree = elementsTableImages.get(2).attr("src");
-            String nameImageTableThree = hrefTableThree.replaceAll("[^0-9]", "") + ".png";
-            hrefTableThree = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTableThree;
-
-            in = new URL(hrefTableThree).openStream();
-            Bitmap bitmapTableThree = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageTableThree);
-            fos = new FileOutputStream(mypath);
-            bitmapTableThree.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapTableThree = directory.getAbsolutePath() + "/" + nameImageTableThree;
-
-            ///////8-ая картинка
-            String hrefTableFour = elementsTableImages.get(3).attr("src");
-            String nameImageTableFour = hrefTableFour.replaceAll("[^0-9]", "") + ".png";
-            hrefTableFour = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTableFour;
-
-            in = new URL(hrefTableFour).openStream();
-            Bitmap bitmapTableFour = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageTableFour);
-            fos = new FileOutputStream(mypath);
-            bitmapTableFour.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapTableFour = directory.getAbsolutePath() + "/" + nameImageTableFour;
-
-            ///////9-ая картинка
-            String hrefTableFive = elementsTableImages.get(4).attr("src");
-            String nameImageTableFive = hrefTableFive.replaceAll("[^0-9]", "") + ".png";
-            hrefTableFive = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTableFive;
-
-            in = new URL(hrefTableFive).openStream();
-            Bitmap bitmapTableFive = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageTableFive);
-            fos = new FileOutputStream(mypath);
-            bitmapTableFive.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapTableFive = directory.getAbsolutePath() + "/" + nameImageTableFive;
 
             //Добавляем данные в ArrayList
             //Добавляем данные в ArrayList будущего матча
@@ -275,12 +196,24 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
                 arrayList.add(resString);
             }
 
-            //Добавляем пути изображений в таблице
-            arrayList.add(dirBitmapTableOne);  //33
-            arrayList.add(dirBitmapTableTwo);  //34
-            arrayList.add(dirBitmapTableThree);  //35
-            arrayList.add(dirBitmapTableFour);  //36
-            arrayList.add(dirBitmapTableFive);  //37
+            //Скачиваем, сохраняем на диск и записываем пути в базу изображения вкладки Чемпионат
+            for (int i = 0; i < 5; i++) {
+                String hrefTable = elementsTableImages.get(i).attr("src");
+                String nameImageTable = hrefTable.replaceAll("[^0-9]", "") + ".png";
+                hrefTable = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTable;
+
+                in = new URL(hrefTable).openStream();
+                Bitmap bitmapTable = BitmapFactory.decodeStream(in);
+                in.close();
+
+                directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
+                mypath = new File(directory, "/"+ nameImageTable);
+                fos = new FileOutputStream(mypath);
+                bitmapTable.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.close();
+                String dirBitmapTable = directory.getAbsolutePath() + "/" + nameImageTable;
+                arrayList.add(dirBitmapTable);
+            }
 
             noInternetException = false;
 
@@ -295,14 +228,14 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
     protected void onPostExecute(ArrayList<String> arrayList) {
         super.onPostExecute(arrayList);
 
-        if(noInternetException == false){
+        if(!noInternetException){
             sqlIteHelper.writeForDB(arrayList);
             futureMatch.mSwipeLayout.setRefreshing(false);
 
             futureMatch.setResultFutureMatch();
         }else {
             futureMatch.mSwipeLayout.setRefreshing(false);
-            Toast.makeText(futureMatch.getContext(),"Не удалось получить данные", Toast.LENGTH_LONG).show();
+            Toast.makeText(futureMatch.getContext(), R.string.internet_error, Toast.LENGTH_LONG).show();
         }
     }
 }

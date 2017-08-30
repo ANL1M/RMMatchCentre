@@ -14,4 +14,5 @@
     <string name="TabLastMatch">Прошлый матч</string>
     <string name="TabFutureMatch">Ближайший матч</string>
     <string name="TabResult">Чемпионат</string>
+    <string name="internet_error">Не удалось получить данные</string>
 </resources>
