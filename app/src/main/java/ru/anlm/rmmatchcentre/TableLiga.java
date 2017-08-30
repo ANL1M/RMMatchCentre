@@ -67,43 +67,43 @@ public class TableLiga extends Fragment{
         arrayList = sqlIteHelper.readForDB();
 
         if(arrayList.size() != 0){
-            tvNumberOne.setText(sqlIteHelper.readForDB().get(13));
-            tvNumberTwo.setText(sqlIteHelper.readForDB().get(14));
-            tvNumberThree.setText(sqlIteHelper.readForDB().get(15));
-            tvNumberFour.setText(sqlIteHelper.readForDB().get(16));
-            tvNumberFive.setText(sqlIteHelper.readForDB().get(17));
+            tvNumberOne.setText(arrayList.get(13));
+            tvNumberTwo.setText(arrayList.get(14));
+            tvNumberThree.setText(arrayList.get(15));
+            tvNumberFour.setText(arrayList.get(16));
+            tvNumberFive.setText(arrayList.get(17));
 
-            tvTeamOne.setText(sqlIteHelper.readForDB().get(18));
-            tvTeamTwo.setText(sqlIteHelper.readForDB().get(19));
-            tvTeamThree.setText(sqlIteHelper.readForDB().get(20));
-            tvTeamFour.setText(sqlIteHelper.readForDB().get(21));
-            tvTeamFive.setText(sqlIteHelper.readForDB().get(22));
+            tvTeamOne.setText(arrayList.get(18));
+            tvTeamTwo.setText(arrayList.get(19));
+            tvTeamThree.setText(arrayList.get(20));
+            tvTeamFour.setText(arrayList.get(21));
+            tvTeamFive.setText(arrayList.get(22));
 
-            tvGamesOne.setText(sqlIteHelper.readForDB().get(23));
-            tvGamesTwo.setText(sqlIteHelper.readForDB().get(24));
-            tvGamesThree.setText(sqlIteHelper.readForDB().get(25));
-            tvGamesFour.setText(sqlIteHelper.readForDB().get(26));
-            tvGamesFive.setText(sqlIteHelper.readForDB().get(27));
+            tvGamesOne.setText(arrayList.get(23));
+            tvGamesTwo.setText(arrayList.get(24));
+            tvGamesThree.setText(arrayList.get(25));
+            tvGamesFour.setText(arrayList.get(26));
+            tvGamesFive.setText(arrayList.get(27));
 
-            tvPointsOne.setText(sqlIteHelper.readForDB().get(28));
-            tvPointsTwo.setText(sqlIteHelper.readForDB().get(29));
-            tvPointsThree.setText(sqlIteHelper.readForDB().get(30));
-            tvPointsFour.setText(sqlIteHelper.readForDB().get(31));
-            tvPointsFive.setText(sqlIteHelper.readForDB().get(32));
+            tvPointsOne.setText(arrayList.get(28));
+            tvPointsTwo.setText(arrayList.get(29));
+            tvPointsThree.setText(arrayList.get(30));
+            tvPointsFour.setText(arrayList.get(31));
+            tvPointsFive.setText(arrayList.get(32));
 
-            String s1 = sqlIteHelper.readForDB().get(33);
+            String s1 = arrayList.get(33);
             ivOne.setImageDrawable(Drawable.createFromPath(s1));
 
-            String s2 = sqlIteHelper.readForDB().get(34);
+            String s2 = arrayList.get(34);
             ivTwo.setImageDrawable(Drawable.createFromPath(s2));
 
-            String s3 = sqlIteHelper.readForDB().get(35);
+            String s3 = arrayList.get(35);
             ivThree.setImageDrawable(Drawable.createFromPath(s3));
 
-            String s4 = sqlIteHelper.readForDB().get(36);
+            String s4 = arrayList.get(36);
             ivFour.setImageDrawable(Drawable.createFromPath(s4));
 
-            String s5 = sqlIteHelper.readForDB().get(37);
+            String s5 = arrayList.get(37);
             ivFive.setImageDrawable(Drawable.createFromPath(s5));
         }
     }

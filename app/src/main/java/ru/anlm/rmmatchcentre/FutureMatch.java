@@ -59,8 +59,10 @@ public class FutureMatch extends Fragment implements SwipeRefreshLayout.OnRefres
             teamAway.setText(arrayList.get(1));
             dateMatch.setText(arrayList.get(2));
             ligaName.setText(arrayList.get(3));
+
             String s = arrayList.get(9);
             ivHomeFM.setImageDrawable(Drawable.createFromPath(s));
+
             String s1 = arrayList.get(10);
             ivGuestFM.setImageDrawable(Drawable.createFromPath(s1));
         }else {
