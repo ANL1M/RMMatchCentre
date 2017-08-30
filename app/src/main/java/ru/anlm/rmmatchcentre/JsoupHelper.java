@@ -32,6 +32,7 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
     protected ArrayList<String> doInBackground(Void... voids) {
 
         ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<String> hrefsBitmap = new ArrayList<>();
         sqlIteHelper = new SQLIteHelper(futureMatch.getContext());
 
         try {
@@ -42,6 +43,8 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             Elements elementsNextMatch = document.select("#match_box_2 img");
             String nameHomeNext = elementsNextMatch.get(1).attr("alt");
             String nameGuestNext = elementsNextMatch.get(2).attr("alt");
+            String hrefHomeImageNM = elementsNextMatch.get(1).attr("src");
+            String hrefGuestImageNM = elementsNextMatch.get(2).attr("src");
 
             if(nameHomeNext.equals("Реал")) {
                 nameHomeNext = "Реал Мадрид";
@@ -58,8 +61,9 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             Elements elementsLastMatch = document.select("#match_box_1 img");
             String nameHomeLast = elementsLastMatch.get(1).attr("alt");
             String nameGuestLast = elementsLastMatch.get(2).attr("alt");
+            String hrefHomeImageLM = elementsLastMatch.get(1).attr("src");
             String hrefGuestImageLM = elementsLastMatch.get(2).attr("src");
-
+            
             //Получаем дату и название лиги для будущего матча
             Elements elementsDataLastMatch = document.select("#match_box_1 div");
             String dayMatchLast = elementsDataLastMatch.get(0).text();
@@ -76,78 +80,19 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             }else if (nameGuestLast.equals("Реал")){
                 nameGuestLast = "Реал Мадрид";}
 
+            //Добавляем к массиву
+            hrefsBitmap.add(hrefHomeImageLM);
+            hrefsBitmap.add(hrefGuestImageLM);
+            hrefsBitmap.add(hrefHomeImageNM);
+            hrefsBitmap.add(hrefGuestImageNM);
+
             //Получаем результат прошлого матча
             Elements elementsResultLastMatch = document.select("#match_box_1 span");
             String resultLastMatch = elementsResultLastMatch.get(1).text();
 
             ContextWrapper contextWrapper = new ContextWrapper(futureMatch.getContext());
-
-            ////1-ая картинка
-            String hrefHomeImageNM = elementsNextMatch.get(1).attr("src");
-            String nameImageHomeNM = hrefHomeImageNM.replaceAll("[^0-9]", "") + ".png";
-            hrefHomeImageNM = "http://ss.sport-express.ru/img/football/commands/"+ nameImageHomeNM;
-
-            InputStream in = new URL(hrefHomeImageNM).openStream();
-            Bitmap bitmapHomeNM = BitmapFactory.decodeStream(in);
-            in.close();
-
-            File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            File mypath = new File(directory, "/"+ nameImageHomeNM);
-            FileOutputStream fos = new FileOutputStream(mypath);
-            bitmapHomeNM.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapHomeNM = directory.getAbsolutePath() + "/" + nameImageHomeNM;
-
-            /////2-ая картинка
-            String hrefGuestImageNM = elementsNextMatch.get(2).attr("src");
-            String nameImageGuestNM = hrefGuestImageNM.replaceAll("[^0-9]", "") + ".png";
-            hrefGuestImageNM = "http://ss.sport-express.ru/img/football/commands/"+ nameImageGuestNM;
-
-            in = new URL(hrefGuestImageNM).openStream();
-            Bitmap bitmapGuestNM = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageGuestNM);
-            fos = new FileOutputStream(mypath);
-            bitmapGuestNM.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapGuestNM = directory.getAbsolutePath() + "/" + nameImageGuestNM;
-
-            /////3-я картинка
-            String hrefHomeImageLM = elementsLastMatch.get(1).attr("src");
-            String nameImageHomeLM = hrefHomeImageLM.replaceAll("[^0-9]", "") + ".png";
-            hrefHomeImageLM = "http://ss.sport-express.ru/img/football/commands/"+ nameImageHomeLM;
-
-            in = new URL(hrefHomeImageLM).openStream();
-            Bitmap bitmapHomeLM = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageHomeLM);
-            fos = new FileOutputStream(mypath);
-            bitmapHomeLM.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapHomeLM = directory.getAbsolutePath() + "/" + nameImageHomeLM;
-
-            /////4-ая картинка
-            String nameImageGuestLM = hrefGuestImageLM.replaceAll("[^0-9]", "") + ".png";
-            hrefGuestImageLM = "http://ss.sport-express.ru/img/football/commands/"+ nameImageGuestLM;
-
-            in = new URL(hrefGuestImageLM).openStream();
-            Bitmap bitmapGuestLM = BitmapFactory.decodeStream(in);
-            in.close();
-
-            directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-            mypath = new File(directory, "/"+ nameImageGuestLM);
-            fos = new FileOutputStream(mypath);
-            bitmapGuestLM.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.close();
-            String dirBitmapGuestLM = directory.getAbsolutePath() + "/" + nameImageGuestLM;
-
             Elements elementsTableImages = document.select(".teamlogo img");
 
-            //Добавляем данные в ArrayList
             //Добавляем данные в ArrayList будущего матча
             arrayList.add(nameHomeNext); //0
             arrayList.add(nameGuestNext); //1
@@ -161,12 +106,22 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             arrayList.add(tournirResLast);  //7
             arrayList.add(resultLastMatch);  //8
 
-            //Добавляем пути изображений
-            arrayList.add(dirBitmapHomeLM);  //9
-            arrayList.add(dirBitmapGuestLM);  //10
-            arrayList.add(dirBitmapHomeNM);  //11
-            arrayList.add(dirBitmapGuestNM);  //12
+            for (String href : hrefsBitmap) {
+                String teamNumber = href.replaceAll("[^0-9]", "") + ".png";
+                String hrefTeamBitmap = "http://ss.sport-express.ru/img/football/commands/"+ teamNumber;
 
+                InputStream in = new URL(hrefTeamBitmap).openStream();
+                Bitmap bitmapTeam = BitmapFactory.decodeStream(in);
+                in.close();
+
+                File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
+                File mypath = new File(directory, "/"+ teamNumber);
+                FileOutputStream fos = new FileOutputStream(mypath);
+                bitmapTeam.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.close();
+                String dirBitmapTeam = directory.getAbsolutePath() + "/" + teamNumber;
+                arrayList.add(dirBitmapTeam);
+            }
 
             //Получаем номера команд в таблице
             Elements elementsTableNumbers = document.select("table.score td:eq(0)");
@@ -202,13 +157,13 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
                 String nameImageTable = hrefTable.replaceAll("[^0-9]", "") + ".png";
                 hrefTable = "http://ss.sport-express.ru/img/football/commands/"+ nameImageTable;
 
-                in = new URL(hrefTable).openStream();
+                InputStream in = new URL(hrefTable).openStream();
                 Bitmap bitmapTable = BitmapFactory.decodeStream(in);
                 in.close();
 
-                directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
-                mypath = new File(directory, "/"+ nameImageTable);
-                fos = new FileOutputStream(mypath);
+                File directory = contextWrapper.getDir("imageDir", Context.MODE_PRIVATE);
+                File mypath = new File(directory, "/"+ nameImageTable);
+                FileOutputStream fos = new FileOutputStream(mypath);
                 bitmapTable.compress(Bitmap.CompressFormat.PNG, 100, fos);
                 fos.close();
                 String dirBitmapTable = directory.getAbsolutePath() + "/" + nameImageTable;
