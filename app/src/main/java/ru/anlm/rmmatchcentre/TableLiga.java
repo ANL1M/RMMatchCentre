@@ -1,5 +1,7 @@
 package ru.anlm.rmmatchcentre;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 
 public class TableLiga extends Fragment{
 
@@ -18,6 +20,7 @@ public class TableLiga extends Fragment{
     TextView tvTeamOne, tvTeamTwo, tvTeamThree, tvTeamFour, tvTeamFive;
     TextView tvGamesOne, tvGamesTwo, tvGamesThree, tvGamesFour, tvGamesFive;
     TextView tvPointsOne, tvPointsTwo, tvPointsThree, tvPointsFour, tvPointsFive;
+
     ImageView ivOne, ivTwo, ivThree, ivFour, ivFive;
     SQLIteHelper sqlIteHelper;
     ArrayList<String> arrayList;
@@ -66,45 +69,23 @@ public class TableLiga extends Fragment{
         arrayList = new ArrayList<>();
         arrayList = sqlIteHelper.readForDB();
 
+        TextView[] screenElem = {tvNumberOne, tvNumberTwo, tvNumberThree, tvNumberFour, tvNumberFive,
+                tvTeamOne, tvTeamTwo, tvTeamThree, tvTeamFour, tvTeamFive,
+                tvGamesOne, tvGamesTwo, tvGamesThree, tvGamesFour, tvGamesFive,
+                tvPointsOne, tvPointsTwo, tvPointsThree, tvPointsFour, tvPointsFive};
+
+        ImageView[] imageElem = {ivOne, ivTwo, ivThree, ivFour, ivFive};
+
         if(arrayList.size() != 0){
-            tvNumberOne.setText(arrayList.get(13));
-            tvNumberTwo.setText(arrayList.get(14));
-            tvNumberThree.setText(arrayList.get(15));
-            tvNumberFour.setText(arrayList.get(16));
-            tvNumberFive.setText(arrayList.get(17));
 
-            tvTeamOne.setText(arrayList.get(18));
-            tvTeamTwo.setText(arrayList.get(19));
-            tvTeamThree.setText(arrayList.get(20));
-            tvTeamFour.setText(arrayList.get(21));
-            tvTeamFive.setText(arrayList.get(22));
+            for (int i = 0; i < screenElem.length; i++) {
+                screenElem[i].setText(arrayList.get(i+13));
+            }
 
-            tvGamesOne.setText(arrayList.get(23));
-            tvGamesTwo.setText(arrayList.get(24));
-            tvGamesThree.setText(arrayList.get(25));
-            tvGamesFour.setText(arrayList.get(26));
-            tvGamesFive.setText(arrayList.get(27));
-
-            tvPointsOne.setText(arrayList.get(28));
-            tvPointsTwo.setText(arrayList.get(29));
-            tvPointsThree.setText(arrayList.get(30));
-            tvPointsFour.setText(arrayList.get(31));
-            tvPointsFive.setText(arrayList.get(32));
-
-            String s1 = arrayList.get(33);
-            ivOne.setImageDrawable(Drawable.createFromPath(s1));
-
-            String s2 = arrayList.get(34);
-            ivTwo.setImageDrawable(Drawable.createFromPath(s2));
-
-            String s3 = arrayList.get(35);
-            ivThree.setImageDrawable(Drawable.createFromPath(s3));
-
-            String s4 = arrayList.get(36);
-            ivFour.setImageDrawable(Drawable.createFromPath(s4));
-
-            String s5 = arrayList.get(37);
-            ivFive.setImageDrawable(Drawable.createFromPath(s5));
+            for (int i = 0; i < imageElem.length ; i++) {
+                String pathString = arrayList.get(i+33);
+                imageElem[i].setImageDrawable(Drawable.createFromPath(pathString));
+            }
         }
     }
 
