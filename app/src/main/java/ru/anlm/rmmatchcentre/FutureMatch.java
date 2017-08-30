@@ -60,10 +60,10 @@ public class FutureMatch extends Fragment implements SwipeRefreshLayout.OnRefres
             dateMatch.setText(arrayList.get(2));
             ligaName.setText(arrayList.get(3));
 
-            String s = arrayList.get(9);
+            String s = arrayList.get(11);
             ivHomeFM.setImageDrawable(Drawable.createFromPath(s));
 
-            String s1 = arrayList.get(10);
+            String s1 = arrayList.get(12);
             ivGuestFM.setImageDrawable(Drawable.createFromPath(s1));
         }else {
             onRefresh();

@@ -48,10 +48,10 @@ public class LastMatch extends Fragment{
             tvLigaNameLM.setText(arrayList.get(7));
             tvLastMatchResult.setText(arrayList.get(8));
 
-            String s = arrayList.get(11);
+            String s = arrayList.get(9);
             ivHomeLM.setImageDrawable(Drawable.createFromPath(s));
 
-            String s1 = arrayList.get(12);
+            String s1 = arrayList.get(10);
             ivGuestLM.setImageDrawable(Drawable.createFromPath(s1));
         }
     }

@@ -241,10 +241,11 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             arrayList.add(resultLastMatch);  //8
 
             //Добавляем пути изображений
-            arrayList.add(dirBitmapHomeNM);  //9
-            arrayList.add(dirBitmapGuestNM);  //10
-            arrayList.add(dirBitmapHomeLM);  //11
-            arrayList.add(dirBitmapGuestLM);  //12
+            arrayList.add(dirBitmapHomeLM);  //9
+            arrayList.add(dirBitmapGuestLM);  //10
+            arrayList.add(dirBitmapHomeNM);  //11
+            arrayList.add(dirBitmapGuestNM);  //12
+
 
             //Получаем номера команд в таблице
             Elements elementsTableNumbers = document.select("table.score td:eq(0)");
