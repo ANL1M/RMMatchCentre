@@ -31,7 +31,7 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
 
-        ArrayList<String> arrayList = null;
+        ArrayList<String> arrayList = new ArrayList<>();
         sqlIteHelper = new SQLIteHelper(futureMatch.getContext());
 
         try {
@@ -75,8 +75,6 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
                 nameHomeLast = "Реал Мадрид";
             }else if (nameGuestLast.equals("Реал")){
                 nameGuestLast = "Реал Мадрид";}
-
-
 
             //Получаем результат прошлого матча
             Elements elementsResultLastMatch = document.select("#match_box_1 span");
@@ -132,9 +130,7 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             fos.close();
             String dirBitmapHomeLM = directory.getAbsolutePath() + "/" + nameImageHomeLM;
 
-
             /////4-ая картинка
-
             String nameImageGuestLM = hrefGuestImageLM.replaceAll("[^0-9]", "") + ".png";
             hrefGuestImageLM = "http://ss.sport-express.ru/img/football/commands/"+ nameImageGuestLM;
 
@@ -230,42 +226,7 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             fos.close();
             String dirBitmapTableFive = directory.getAbsolutePath() + "/" + nameImageTableFive;
 
-
-            //Получаем номера команд в таблице
-            Elements elementsTableNumbers = document.select("table.score td:eq(0)");
-            String tableNumberOne = elementsTableNumbers.get(5).text();
-            String tableNumberTwo = elementsTableNumbers.get(6).text();
-            String tableNumberThree = elementsTableNumbers.get(7).text();
-            String tableNumberFour = elementsTableNumbers.get(8).text();
-            String tableNumberFive = elementsTableNumbers.get(9).text();
-
-            //Получаем названия команд в таблице
-            Elements elementsTableNames = document.select("table.score td:eq(2)");
-            String tableNameOne = elementsTableNames.get(1).text();
-            String tableNameTwo = elementsTableNames.get(2).text();
-            String tableNameThree = elementsTableNames.get(3).text();
-            String tableNameFour = elementsTableNames.get(4).text();
-            String tableNameFive = elementsTableNames.get(5).text();
-
-            //Получаем количество игр в таблице
-            Elements elementsTableGames = document.select("table.score td:eq(3)");
-            String tableGamesOne = elementsTableGames.get(1).text();
-            String tableGamesTwo = elementsTableGames.get(2).text();
-            String tableGamesThree = elementsTableGames.get(3).text();
-            String tableGamesFour = elementsTableGames.get(4).text();
-            String tableGamesFive = elementsTableGames.get(5).text();
-
-            //Получаем количество игр в таблице
-            Elements elementsTablePosition = document.select("table.score td:eq(8)");
-            String tablePositionOne = elementsTablePosition.get(0).text();
-            String tablePositionTwo = elementsTablePosition.get(1).text();
-            String tablePositionThree = elementsTablePosition.get(2).text();
-            String tablePositionFour = elementsTablePosition.get(3).text();
-            String tablePositionFive = elementsTablePosition.get(4).text();
-
             //Добавляем данные в ArrayList
-            arrayList = new ArrayList<String>();
-
             //Добавляем данные в ArrayList будущего матча
             arrayList.add(nameHomeNext); //0
             arrayList.add(nameGuestNext); //1
@@ -285,33 +246,33 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             arrayList.add(dirBitmapHomeLM);  //11
             arrayList.add(dirBitmapGuestLM);  //12
 
-            //Добавляем номера команд в таблице
-            arrayList.add(tableNumberOne);  //13
-            arrayList.add(tableNumberTwo);  //14
-            arrayList.add(tableNumberThree);  //15
-            arrayList.add(tableNumberFour);  //16
-            arrayList.add(tableNumberFive);  //17
+            //Получаем номера команд в таблице
+            Elements elementsTableNumbers = document.select("table.score td:eq(0)");
+            for (int i = 5; i < 10; i++) {
+                String resString = elementsTableNumbers.get(i).text();
+                arrayList.add(resString);
+            }
 
-            //Добавляем названия команд в таблице
-            arrayList.add(tableNameOne);  //18
-            arrayList.add(tableNameTwo);  //19
-            arrayList.add(tableNameThree);  //20
-            arrayList.add(tableNameFour);  //21
-            arrayList.add(tableNameFive);  //22
+            //Получаем названия команд в таблице
+            Elements elementsTableNames = document.select("table.score td:eq(2)");
+            for (int i = 1; i < 6; i++) {
+                String resString = elementsTableNames.get(i).text();
+                arrayList.add(resString);
+            }
 
-            //Добавляем количество игр в таблице
-            arrayList.add(tableGamesOne);  //23
-            arrayList.add(tableGamesTwo);  //24
-            arrayList.add(tableGamesThree);  //25
-            arrayList.add(tableGamesFour);  //26
-            arrayList.add(tableGamesFive);  //27
+            //Получаем количество игр в таблице
+            Elements elementsTableGames = document.select("table.score td:eq(3)");
+            for (int i = 1; i < 6; i++) {
+                String resString = elementsTableGames.get(i).text();
+                arrayList.add(resString);
+            }
 
-            //Добавляем количество игр в таблице
-            arrayList.add(tablePositionOne);  //28
-            arrayList.add(tablePositionTwo);  //29
-            arrayList.add(tablePositionThree);  //30
-            arrayList.add(tablePositionFour);  //31
-            arrayList.add(tablePositionFive);  //32
+            //Получаем количество игр в таблице
+            Elements elementsTablePosition = document.select("table.score td:eq(8)");
+            for (int i = 0; i < 5; i++) {
+                String resString = elementsTablePosition.get(i).text();
+                arrayList.add(resString);
+            }
 
             //Добавляем пути изображений в таблице
             arrayList.add(dirBitmapTableOne);  //33
