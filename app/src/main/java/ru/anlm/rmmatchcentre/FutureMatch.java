@@ -29,7 +29,7 @@ public class FutureMatch extends Fragment implements SwipeRefreshLayout.OnRefres
         teamAway = (TextView) rootView.findViewById(R.id.tvGuestLastMatch);
         dateMatch = (TextView) rootView.findViewById(R.id.tvLastMatchDate);
         ligaName = (TextView) rootView.findViewById(R.id.tvLigaNameFM);
-        statusTV = (TextView) rootView.findViewById(R.id.tvRefreshDateFM);
+        //statusTV = (TextView) rootView.findViewById(R.id.tvRefreshDateFM);
         ivHomeFM = (ImageView)  rootView.findViewById(R.id.ivHomeFM);
         ivGuestFM = (ImageView)  rootView.findViewById(R.id.ivGuestLM);
 
