@@ -22,7 +22,7 @@ public class LastMatch extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.last_match, container, false);
 
-        tvRefreshDateLM = (TextView) rootView.findViewById(R.id.tvRefreshDateLM);
+        //tvRefreshDateLM = (TextView) rootView.findViewById(R.id.tvRefreshDateLM);
         tvGuestLastMatch = (TextView) rootView.findViewById(R.id.tvGuestLastMatch);
         tvHomeLastMatch = (TextView) rootView.findViewById(R.id.tvHomeLastMatch);
         tvLastMatchDate = (TextView) rootView.findViewById(R.id.tvLastMatchDate);
