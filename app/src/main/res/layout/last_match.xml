@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="4"
         android:orientation="horizontal">
 
         <ImageView
@@ -18,7 +18,7 @@
             android:layout_alignParentTop="false"
             android:layout_gravity="center"
             android:layout_marginLeft="30sp"
-            android:layout_marginRight="20sp"
+            android:layout_marginRight="15sp"
             android:contentDescription="@string/image_home"/>
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="false"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="30sp"
@@ -75,7 +75,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="4"
         android:orientation="horizontal">
 
         <ImageView
@@ -84,7 +84,7 @@
             android:layout_height="100sp"
             android:layout_gravity="center"
             android:layout_marginLeft="30sp"
-            android:layout_marginRight="20sp"
+            android:layout_marginRight="15sp"
             android:contentDescription="@string/image_away"
             tools:mockup=""/>
 

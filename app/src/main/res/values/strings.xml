@@ -15,4 +15,5 @@
     <string name="TabFutureMatch">Ближайший матч</string>
     <string name="TabResult">Чемпионат</string>
     <string name="internet_error">Не удалось получить данные</string>
+    <string name="str_vs">VS</string>
 </resources>
