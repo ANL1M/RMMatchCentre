@@ -16,4 +16,5 @@
     <string name="TabResult">Чемпионат</string>
     <string name="internet_error">Не удалось получить данные</string>
     <string name="str_vs">VS</string>
+    <string name="str_loadind">Загрузка…</string>
 </resources>

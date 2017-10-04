@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class FutureMatch extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     public SwipeRefreshLayout mSwipeLayout;
-    TextView teamHome, teamAway, dateMatch, ligaName, statusTV;
+    TextView teamHome, teamAway, dateMatch, ligaName, tvVS;
     ImageView ivHomeFM, ivGuestFM;
     SQLIteHelper sqlIteHelper;
     ArrayList<String> arrayList;
@@ -29,18 +29,19 @@ public class FutureMatch extends Fragment implements SwipeRefreshLayout.OnRefres
         teamAway = (TextView) rootView.findViewById(R.id.tvGuestLastMatch);
         dateMatch = (TextView) rootView.findViewById(R.id.tvLastMatchDate);
         ligaName = (TextView) rootView.findViewById(R.id.tvLigaNameFM);
-        //statusTV = (TextView) rootView.findViewById(R.id.tvRefreshDateFM);
+        tvVS = (TextView) rootView.findViewById(R.id.tvVS);
         ivHomeFM = (ImageView)  rootView.findViewById(R.id.ivHomeFM);
         ivGuestFM = (ImageView)  rootView.findViewById(R.id.ivGuestLM);
 
         mSwipeLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         mSwipeLayout.setOnRefreshListener(this);
-        mSwipeLayout.setColorSchemeColors(Color.BLUE);
+        mSwipeLayout.setColorSchemeColors(getResources().getColor(R.color.real_yellow));
 
         sqlIteHelper = new SQLIteHelper(getActivity());
 
         return rootView;
     }
+
 
     @Override
     public void onRefresh() {
@@ -59,13 +60,16 @@ public class FutureMatch extends Fragment implements SwipeRefreshLayout.OnRefres
             teamAway.setText(arrayList.get(1));
             dateMatch.setText(arrayList.get(2));
             ligaName.setText(arrayList.get(3));
+            tvVS.setText(R.string.str_vs);
 
             String s = arrayList.get(11);
             ivHomeFM.setImageDrawable(Drawable.createFromPath(s));
 
             String s1 = arrayList.get(12);
             ivGuestFM.setImageDrawable(Drawable.createFromPath(s1));
+
         }else {
+            tvVS.setText(R.string.str_loadind);
             onRefresh();
         }
     }

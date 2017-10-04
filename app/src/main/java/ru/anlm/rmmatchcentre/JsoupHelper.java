@@ -188,6 +188,7 @@ public class JsoupHelper extends AsyncTask<Void, Void, ArrayList<String>>{
             futureMatch.mSwipeLayout.setRefreshing(false);
 
             futureMatch.setResultFutureMatch();
+
         }else {
             futureMatch.mSwipeLayout.setRefreshing(false);
             Toast.makeText(futureMatch.getContext(), R.string.internet_error, Toast.LENGTH_LONG).show();
